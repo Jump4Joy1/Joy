@@ -174,6 +174,23 @@ body {
   transform: translateY(0);
 }
 
+/* Gated content link (OnlyFans) with lock icon overlay */
+.content-link--gated {
+  position: relative;
+}
+
+.content-link--gated .content-link__text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.content-link__icon {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
 /* OnlyFans Gate Overlay */
 .gate-overlay {
   position: fixed;
