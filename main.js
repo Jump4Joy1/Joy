@@ -24,7 +24,8 @@ const CONFIG = {
     { label: "OnlyFans", url: "https://onlyfans.com/jump_4_joy", gated: true, icon: "lock" },
     { label: "Amazon Wishlist", url: "https://www.amazon.com/hz/wishlist/profle/jumpforjoy69", gated: false },
     { label: "$Cashapp", url: "https://cash.app/$jumpforjoy69", gated: false },
-    { label: "$Venmo", url: "https://venmo.com/u/jumpforjoy69", gated: false }
+    { label: "$Venmo", url: "https://venmo.com/u/jumpforjoy69", gated: false },
+    { label: "Gifts to Impress Me", url: "https://giftful.com/wishlists/pe9VtuTXEZL9ojY8QCFh", gated: false }
   ]
 };
 // ═══════════════════════════════════════════════════════
