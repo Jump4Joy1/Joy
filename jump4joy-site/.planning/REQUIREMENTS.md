@@ -7,30 +7,25 @@
 
 ### Profile
 
-- [ ] **PROF-01**: Avatar displayed prominently (circular, 96-120px, accent border)
+- [ ] **PROF-01**: Avatar displayed prominently (circular, 96-120px, neon pink border/glow)
 - [ ] **PROF-02**: Username displayed with @ prefix
 - [ ] **PROF-03**: Bio text that serves as a conversion hook (Who + What + Why subscribe)
 
 ### Primary CTA
 
-- [ ] **CTA-01**: OnlyFans link as the FIRST content link, with lock icon overlay
-- [ ] **CTA-02**: Age verification gate (18+ button) blocks OnlyFans only
+- [ ] **CTA-01**: "Premium" button as the FIRST content link, linking to OnlyFans, with lock icon overlay
+- [ ] **CTA-02**: Age verification gate (18+ button) blocks Premium link only
 - [ ] **CTA-03**: Gate overlay with "I am 18+, Enter" button, close button, click-outside-to-close
 
 ### Social Links
 
 - [ ] **SOCL-01**: Instagram link with icon
 - [ ] **SOCL-02**: TikTok link with icon
-- [ ] **SOCL-03**: Social links positioned below content links (subordinate to primary CTA)
-
-### Supporting Monetization
-
-- [ ] **MON-01**: CashApp link (non-gated, opens immediately)
-- [ ] **MON-02**: Amazon Wishlist link (non-gated, opens immediately)
+- [ ] **SOCL-03**: Social links visible and accessible
 
 ### Visual & Technical
 
-- [ ] **VIS-01**: Dark theme with conversion-optimized accent color (different from jump4joy-site to grab attention)
+- [ ] **VIS-01**: Dark theme (#0a0a0f) with neon pink accent (#ff2d6a) — different from jump4joy-site to grab attention
 - [ ] **VIS-02**: Single-column mobile-first layout, 580px max-width
 - [ ] **VIS-03**: Subtle hover animations (translateY lift + shadow)
 - [ ] **VIS-04**: Open Graph + Twitter Card meta tags for platform previews
@@ -54,9 +49,8 @@ Deferred to future release. Tracked but not in current roadmap.
 
 ### Differentiators
 
-- **DIFF-01**: Accent color A/B test (neon pink vs gold vs current)
-- **DIFF-02**: Link label A/B test ("OnlyFans" vs "My OnlyFans" vs "Exclusive Content")
-- **DIFF-03**: Announcement banner for promotions
+- **DIFF-01**: Link label A/B test ("Premium" vs "Get more joy here ;)" vs "Exclusive Content")
+- **DIFF-02**: Announcement banner for promotions
 
 ## Out of Scope
 
@@ -72,7 +66,9 @@ Deferred to future release. Tracked but not in current roadmap.
 | Autoplay video/media | Distracts from conversion goal |
 | Navigation menu | Link-in-bio is one-scroll destination |
 | Payment processing on page | Security complexity; point to CashApp/Venmo directly |
-| More than 4 links | Every extra link drops OnlyFans CTR 40-60% |
+| Email signup form | Adds friction, no backend to handle |
+| More than 1 content link | Minimal links = focused conversion funnel |
+| CashApp/Venmo/Wishlist | Not on reference Linktree; keeping minimal |
 
 ## Traceability
 
@@ -87,8 +83,6 @@ Deferred to future release. Tracked but not in current roadmap.
 | SOCL-01 | Phase 3 | Pending |
 | SOCL-02 | Phase 3 | Pending |
 | SOCL-03 | Phase 3 | Pending |
-| MON-01 | Phase 4 | Pending |
-| MON-02 | Phase 4 | Pending |
 | VIS-01 | Phase 1 | Pending |
 | VIS-02 | Phase 1 | Pending |
 | VIS-03 | Phase 5 | Pending |
@@ -99,10 +93,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | CONF-02 | Phase 1 | Pending |
 
 **Coverage:**
-- v1 requirements: 19 total
-- Mapped to phases: 19
+- v1 requirements: 17 total
+- Mapped to phases: 17
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-12*
-*Last updated: 2026-04-12 after roadmap creation*
+*Last updated: 2026-04-12 after scope clarification*

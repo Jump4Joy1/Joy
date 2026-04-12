@@ -38,7 +38,7 @@ A visually striking, conversion-optimized link hub that drives traffic to a crea
 
 **Goal:** Less links than jump4joy-site, but different style/color to grab attention and drive conversions. The design should feel fresh compared to the existing site while still being fast-loading and mobile-first.
 
-**Reference site:** linktr.ee/get_more_joy (to be reviewed for layout/structure inspiration)
+**Reference site:** linktr.ee/get_more_joy — ultra-minimal, 1 content link (OnlyFans) + TikTok only. Joy-OF adds Instagram.
 
 **Domain:** jump4joy.biz (Cloudflare Pages already configured)
 
