@@ -20,7 +20,7 @@ const CONFIG = {
     { name: "TikTok", url: "https://tiktok.com/@get_more_joy" }
   ],
   links: [
-    { label: "OnlyFans", url: "https://onlyfans.com/jump_4_joy", gated: true },
+    { label: "Premium", url: "https://onlyfans.com/jump_4_joy", gated: true },
     { label: "Amazon Wishlist", url: "https://www.amazon.com/hz/wishlist/profle/jumpforjoy69", gated: false },
     { label: "$Cashapp", url: "https://cash.app/$jumpforjoy69", gated: false },
     { label: "$Venmo", url: "https://venmo.com/u/jumpforjoy69", gated: false },
