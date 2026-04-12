@@ -14,7 +14,7 @@ const CONFIG = {
     username: "@jump_4_joy",
     displayName: "jump_4_joy",
     bio: "Your favorite Milf. 💋",
-    avatarUrl: "https://i.postimg.cc/9FHpbTMp/IMG_5333.jpg"
+    avatarUrl: "https://jump4joy.me/assets/avatar.jpg"
   },
   social: [
     { name: "Instagram", url: "https://instagram.com/all_your_joy", icon: "instagram" },
