@@ -1,6 +1,5 @@
 /* CSS Custom Properties */
 :root {
-  /* Colors */
   --color-bg: #050f15;
   --color-accent: #bb8773;
   --color-accent-hover: #226691;
@@ -8,8 +7,6 @@
   --color-text-muted: #c58c77;
   --color-border: #bb8773;
   --color-surface: #0a1a24;
-
-  /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -17,26 +14,17 @@
   --space-xl: 32px;
   --space-2xl: 48px;
   --space-3xl: 64px;
-
-  /* Typography */
   --font-primary: 'Space Grotesk', sans-serif;
   --font-secondary: 'Inter', sans-serif;
-
-  /* Border radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-full: 9999px;
 }
 
-/* Reset and base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -45,13 +33,28 @@ body {
   color: var(--color-text);
   line-height: 1.5;
   min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
-/* Page layout */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(60px) brightness(0.2);
+  z-index: -1;
+  transform: scale(1.3);
+}
+
 .page-container {
   max-width: 580px;
   margin: 0 auto;
-  padding: var(--space-3xl) var(--space-md) var(--space-3xl);
+  padding: 60px 20px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,74 +63,55 @@ body {
 
 @media (min-width: 768px) {
   .page-container {
-    padding-top: 80px;
+    padding-top: 100px;
   }
 }
 
-/* Profile section */
 .profile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: var(--space-xl);
-}
-
-/* Faded background effect using profile image */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center top;
-  filter: blur(30px) brightness(0.25);
-  z-index: -1;
-  transform: scale(1.2);
+  margin-bottom: var(--space-lg);
+  text-align: center;
 }
 
 .avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: var(--radius-full);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
   border: 4px solid var(--color-accent);
-  box-shadow: 0 0 40px rgba(187, 135, 115, 0.5), 0 0 80px rgba(34, 102, 145, 0.3);
+  box-shadow: 0 0 30px rgba(34, 102, 145, 0.5);
   object-fit: cover;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 @media (min-width: 768px) {
   .avatar {
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
   }
 }
 
 .username {
   font-family: var(--font-primary);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .bio {
-  font-family: var(--font-primary);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
+  font-family: var(--font-secondary);
+  font-size: 15px;
+  font-weight: 400;
   color: var(--color-text-muted);
   text-align: center;
 }
 
-/* Social links section */
 .social-links {
   display: flex;
   flex-direction: row;
-  gap: var(--space-lg);
-  margin-top: var(--space-xl);
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
   margin-bottom: var(--space-lg);
 }
 
@@ -135,29 +119,32 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: var(--color-accent);
+  width: 48px;
+  height: 48px;
+  color: var(--color-text);
   text-decoration: none;
-  transition: color 0.2s ease, filter 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.2s ease;
 }
 
 .social-link:hover {
-  color: var(--color-accent-hover);
-  filter: drop-shadow(0 0 8px rgba(34, 102, 145, 0.5));
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: scale(1.1);
 }
 
 .social-link svg {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
 }
 
-/* Content links section */
 .content-links {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   max-width: 400px;
 }
 
@@ -165,66 +152,79 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 64px;
-  padding: 16px 14px;
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+  min-height: 56px;
+  padding: 14px 20px;
+  background: transparent;
+  color: var(--color-text);
   font-family: var(--font-primary);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   text-decoration: none;
   text-align: center;
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-accent);
+  border-radius: 50px;
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.08, 0.59, 0.29, 0.99),
-              box-shadow 0.2s cubic-bezier(0.08, 0.59, 0.29, 0.99);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: -1;
+}
+
+.content-link:hover::before {
+  opacity: 1;
 }
 
 .content-link:hover {
+  color: var(--color-bg);
+  border-color: var(--color-accent);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(34, 102, 145, 0.3);
 }
 
 .content-link:active {
   transform: translateY(0);
 }
 
-/* Gated content link (OnlyFans) with lock icon overlay */
-.content-link--gated {
+.content-link span {
   position: relative;
+  z-index: 1;
 }
 
-.content-link--gated .content-link__text {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* OnlyFans button with lock icon */
+.content-link--gated .lock-icon {
+  margin-right: 8px;
+  font-size: 14px;
 }
 
-.content-link__icon {
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.8;
-}
-
-/* OnlyFans Gate Overlay */
+/* Gate Overlay */
 .gate-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(5, 15, 21, 0.9);
+  background-color: rgba(5, 15, 21, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: var(--space-md);
+  padding: 20px;
 }
 
 .gate-card {
   position: relative;
   background-color: var(--color-surface);
-  border: 1px solid var(--color-accent);
+  border: 2px solid var(--color-accent);
   border-radius: var(--radius-md);
-  padding: var(--space-xl);
+  padding: 32px 24px;
   max-width: 320px;
   text-align: center;
 }
@@ -234,42 +234,42 @@ body::before {
   font-size: 20px;
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: var(--space-md);
+  margin-bottom: 12px;
 }
 
 .gate-body {
   font-family: var(--font-secondary);
   font-size: 14px;
-  font-weight: 400;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-lg);
+  margin-bottom: 24px;
   line-height: 1.5;
 }
 
 .gate-cta {
   width: 100%;
-  padding: 14px 16px;
+  padding: 14px 20px;
   background-color: var(--color-accent);
   color: var(--color-bg);
   font-family: var(--font-primary);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .gate-cta:hover {
-  background-color: #a07766;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 102, 145, 0.4);
 }
 
 .gate-close {
   position: absolute;
-  top: var(--space-md);
-  right: var(--space-md);
-  width: 44px;
-  height: 44px;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
   background: none;
   border: none;
   color: var(--color-text-muted);
@@ -277,20 +277,24 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 20px;
 }
 
-/* Error message */
+.gate-close:hover {
+  color: var(--color-text);
+}
+
 .error-message {
   position: fixed;
-  bottom: var(--space-lg);
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--color-surface);
   border: 1px solid var(--color-accent);
   border-radius: var(--radius-sm);
-  padding: var(--space-md);
+  padding: 12px 16px;
   color: var(--color-text-muted);
-  font-size: 14px;
+  font-size: 13px;
   max-width: 90%;
   text-align: center;
 }
