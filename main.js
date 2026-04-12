@@ -14,7 +14,7 @@ const CONFIG = {
     username: "@jump_4_joy",
     displayName: "jump_4_joy",
     bio: "Your favorite Milf. 💋",
-    avatarUrl: "https://pbs.twimg.com/profile_images/1552036985566760961/j-xt6AFV_400x400.jpg"
+    avatarUrl: "https://i.ibb.co/vC9b6qns/IMG-5333.jpg"
   },
   social: [
     { name: "Instagram", url: "https://instagram.com/all_your_joy", icon: "instagram" },
@@ -172,11 +172,13 @@ window.onerror = function(message, source, lineno, colno, error) {
   return false;
 };
 
-// Initialize page: build links from CONFIG and attach handlers
+// Initialize page: build links from CONFIG, set background, and attach handlers
 document.addEventListener('DOMContentLoaded', () => {
   buildContentLinks();
   buildSocialLinks();
   attachLinkHandlers();
+  // Set faded background image from CONFIG
+  document.body.style.setProperty('--bg-image', `url('${CONFIG.profile.avatarUrl}')`);
 });
 
 console.log('Jump4Joy page loaded successfully');

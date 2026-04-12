@@ -72,20 +72,36 @@ body {
   margin-bottom: var(--space-xl);
 }
 
+/* Faded background effect using profile image */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center top;
+  filter: blur(30px) brightness(0.25);
+  z-index: -1;
+  transform: scale(1.2);
+}
+
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   border-radius: var(--radius-full);
-  border: 3px solid var(--color-accent);
-  box-shadow: 0 4px 20px rgba(34, 102, 145, 0.4);
+  border: 4px solid var(--color-accent);
+  box-shadow: 0 0 40px rgba(187, 135, 115, 0.5), 0 0 80px rgba(34, 102, 145, 0.3);
   object-fit: cover;
   margin-bottom: var(--space-lg);
 }
 
 @media (min-width: 768px) {
   .avatar {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
   }
 }
 
