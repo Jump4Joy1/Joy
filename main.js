@@ -25,7 +25,8 @@ const CONFIG = {
     { label: "Amazon Wishlist", url: "https://www.amazon.com/hz/wishlist/ls/3HN4O7IR2VIBF?ref_=wl_share", gated: false },
     { label: "$Cashapp", url: "https://cash.app/$jumpforjoy69", gated: false },
     { label: "$Venmo", url: "https://venmo.com/u/Jump_4Joy1", gated: false },
-    { label: "$Chime", copyValue: "$jump4joy1", gated: false }
+    { label: "$Chime", copyValue: "$jump4joy1", gated: false },
+    { label: "$Zelle", showQR: "assets/zelle-qr.jpg", gated: false }
   ]
 };
 // ═══════════════════════════════════════════════════════
@@ -65,11 +66,12 @@ function buildContentLinks() {
   CONFIG.links.forEach(link => {
     const btn = document.createElement('a');
     btn.className = 'content-link' + (link.gated ? ' content-link--gated' : '');
-    btn.href = link.url;
+    btn.href = link.url || '#';
     btn.target = '_blank';
     btn.rel = 'noopener noreferrer';
     btn.dataset.gated = link.gated ? 'true' : 'false';
     btn.dataset.copyValue = link.copyValue || '';
+    btn.dataset.showQR = link.showQR || '';
 
     // Create inner content with optional icon
     if (link.icon === 'lock') {
@@ -119,6 +121,47 @@ function buildSocialLinks() {
   });
 }
 
+// QR Modal for Zelle etc.
+function showQRModal(imageSrc, label) {
+  // Remove existing modal if any
+  const existing = document.getElementById('qr-modal');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'qr-modal';
+  overlay.innerHTML = `
+    <div class="qr-modal__backdrop"></div>
+    <div class="qr-modal__card">
+      <h2 class="qr-modal__title">${label}</h2>
+      <img class="qr-modal__image" src="${imageSrc}" alt="${label} QR Code">
+      <button class="qr-modal__close" aria-label="Close">&times;</button>
+    </div>
+  `;
+
+  const style = document.createElement('style');
+  style.id = 'qr-modal-styles';
+  style.textContent = `
+    #qr-modal { position: fixed; inset: 0; z-index: 3000; display: flex; align-items: center; justify-content: center; }
+    .qr-modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); }
+    .qr-modal__card { position: relative; background: #0a1520; border: 2px solid #bb8773; border-radius: 16px; padding: 32px; max-width: 320px; width: 90%; text-align: center; box-shadow: 0 8px 40px rgba(187,135,115,0.3); animation: qrFadeIn 0.2s ease-out; }
+    @keyframes qrFadeIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .qr-modal__title { color: #bb8773; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; margin: 0 0 20px; }
+    .qr-modal__image { width: 100%; max-width: 260px; border-radius: 12px; border: 1px solid rgba(187,135,115,0.3); }
+    .qr-modal__close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: #666; font-size: 28px; cursor: pointer; line-height: 1; }
+    .qr-modal__close:hover { color: #bb8773; }
+  `;
+  document.head.appendChild(style);
+
+  overlay.querySelector('.qr-modal__backdrop').addEventListener('click', closeQRModal);
+  overlay.querySelector('.qr-modal__close').addEventListener('click', closeQRModal);
+  document.body.appendChild(overlay);
+
+  function closeQRModal() {
+    overlay.remove();
+    style.remove();
+  }
+}
+
 // Attach click handlers to content links
 function attachLinkHandlers() {
   const links = document.querySelectorAll('.content-link');
@@ -146,6 +189,9 @@ function attachLinkHandlers() {
             // Fallback: show instructions
             link.textContent = 'Copy: $jump4joy1';
           });
+        // QR code link (e.g. Zelle)
+        } else if (link.dataset.showQR) {
+          showQRModal(link.dataset.showQR, link.textContent.trim());
         } else {
           openInNewTab(link.href);
         }
