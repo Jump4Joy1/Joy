@@ -11,9 +11,9 @@ const errorMessage = document.querySelector('.error-message');
 // ═══════════════════════════════════════════════════════
 const CONFIG = {
   profile: {
-    username: "@get_more_joy",
-    displayName: "get_more_joy",
-    bio: "Your favorite MILF 💋",
+    username: "@jump_4_joy",
+    displayName: "jump_4_joy",
+    bio: "Your favorite Milf. 💋",
     avatarUrl: "https://pbs.twimg.com/profile_images/1552036985566760961/j-xt6AFV_400x400.jpg"
   },
   social: [
@@ -21,7 +21,10 @@ const CONFIG = {
     { name: "TikTok", url: "https://tiktok.com/@get_more_joy", icon: "tiktok" }
   ],
   links: [
-    { label: "Premium", url: "https://onlyfans.com/jump_4_joy/c4", gated: true, icon: "lock" }
+    { label: "OnlyFans", url: "https://onlyfans.com/jump_4_joy", gated: true, icon: "lock" },
+    { label: "Amazon Wishlist", url: "https://www.amazon.com/hz/wishlist/ls/3HN4O7IR2VIBF?ref_=wl_share", gated: false },
+    { label: "$Cashapp", url: "https://cash.app/$jumpforjoy69", gated: false },
+    { label: "$Venmo", url: "https://venmo.com/u/Jump_4Joy1", gated: false }
   ]
 };
 // ═══════════════════════════════════════════════════════
@@ -120,7 +123,7 @@ function attachLinkHandlers() {
 
   links.forEach(link => {
     if (link.dataset.gated === 'true') {
-      // Gated link (Premium/OnlyFans) - show gate overlay instead of opening
+      // Gated link (OnlyFans) - show gate overlay instead of opening
       link.addEventListener('click', (e) => {
         if (!onlyFansGatePassed) {
           e.preventDefault();
@@ -137,14 +140,14 @@ function attachLinkHandlers() {
   });
 }
 
-// Gate CTA: dismiss gate and open Premium/OnlyFans link
+// Gate CTA: dismiss gate and open OnlyFans link
 gateCta.addEventListener('click', () => {
   onlyFansGatePassed = true;
   gateOverlay.style.display = 'none';
-  // Find Premium link and open it
-  const premiumLink = document.querySelector('.content-link[data-gated="true"]');
-  if (premiumLink) {
-    openInNewTab(premiumLink.href);
+  // Find OnlyFans link and open it
+  const onlyFansLink = document.querySelector('.content-link[data-gated="true"]');
+  if (onlyFansLink) {
+    openInNewTab(onlyFansLink.href);
   }
 });
 
@@ -169,11 +172,102 @@ window.onerror = function(message, source, lineno, colno, error) {
   return false;
 };
 
+// ═══════════════════════════════════════════════════════
+// VOTING BANNER — Maxim Cover Girl Contest
+// ═══════════════════════════════════════════════════════
+const VOTING_BANNER_KEY = 'jump4joy_voting_banner_dismissed';
+const VOTING_URL = 'https://covergirl.maxim.com/p/X2CSJGYS';
+
+function createVotingBanner() {
+  // Already dismissed this session
+  if (sessionStorage.getItem(VOTING_BANNER_KEY)) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'voting-banner';
+  banner.innerHTML = `
+    <span class="voting-banner__text">Vote for Joy for Maxim Cover Girl!</span>
+    <a href="${VOTING_URL}" target="_blank" rel="noopener noreferrer" class="voting-banner__btn">Vote Now</a>
+    <button class="voting-banner__close" aria-label="Dismiss">&times;</button>
+  `;
+
+  // Inject styles
+  const style = document.createElement('style');
+  style.id = 'voting-banner-styles';
+  style.textContent = `
+    #voting-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-bottom: 2px solid #f5c518;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 2000;
+      font-family: var(--font-secondary, 'Inter', sans-serif);
+      animation: slideDown 0.3s ease-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .voting-banner__text {
+      color: #f5c518;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .voting-banner__btn {
+      background: #f5c518;
+      color: #1a1a2e;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .voting-banner__btn:hover {
+      background: #ffd700;
+    }
+    .voting-banner__close {
+      position: absolute;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+    .voting-banner__close:hover {
+      color: #fff;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const closeBtn = banner.querySelector('.voting-banner__close');
+  closeBtn.addEventListener('click', () => {
+    banner.remove();
+    const styleEl = document.getElementById('voting-banner-styles');
+    if (styleEl) styleEl.remove();
+    sessionStorage.setItem(VOTING_BANNER_KEY, '1');
+  });
+
+  document.body.appendChild(banner);
+}
+
+// ═══════════════════════════════════════════════════════
 // Initialize page: build links from CONFIG and attach handlers
+// ═══════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   buildContentLinks();
   buildSocialLinks();
   attachLinkHandlers();
+  createVotingBanner();
 });
 
-console.log('Joy-OF page loaded successfully');
+console.log('Jump4Joy page loaded successfully');

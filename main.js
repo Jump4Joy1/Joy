@@ -24,7 +24,8 @@ const CONFIG = {
     { label: "OnlyFans", url: "https://onlyfans.com/jump_4_joy", gated: true, icon: "lock" },
     { label: "Amazon Wishlist", url: "https://www.amazon.com/hz/wishlist/ls/3HN4O7IR2VIBF?ref_=wl_share", gated: false },
     { label: "$Cashapp", url: "https://cash.app/$jumpforjoy69", gated: false },
-    { label: "$Venmo", url: "https://venmo.com/u/Jump_4Joy1", gated: false }
+    { label: "$Venmo", url: "https://venmo.com/u/Jump_4Joy1", gated: false },
+    { label: "$Chime", url: "https://chime.com/$jump4joy1", gated: false }
   ]
 };
 // ═══════════════════════════════════════════════════════
@@ -192,6 +193,7 @@ function createVotingBanner() {
 
   // Inject styles
   const style = document.createElement('style');
+  style.id = 'voting-banner-styles';
   style.textContent = `
     #voting-banner {
       position: fixed;
@@ -245,19 +247,18 @@ function createVotingBanner() {
     .voting-banner__close:hover {
       color: #fff;
     }
-    body { padding-top: 52px; }
   `;
   document.head.appendChild(style);
 
   const closeBtn = banner.querySelector('.voting-banner__close');
   closeBtn.addEventListener('click', () => {
     banner.remove();
+    const styleEl = document.getElementById('voting-banner-styles');
+    if (styleEl) styleEl.remove();
     sessionStorage.setItem(VOTING_BANNER_KEY, '1');
-    document.body.style.paddingTop = '';
   });
 
   document.body.appendChild(banner);
-  document.body.style.paddingTop = '52px';
 }
 
 // ═══════════════════════════════════════════════════════
