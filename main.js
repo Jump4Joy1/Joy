@@ -25,7 +25,7 @@ const CONFIG = {
     { label: "Amazon Wishlist", url: "https://www.amazon.com/hz/wishlist/ls/3HN4O7IR2VIBF?ref_=wl_share", gated: false },
     { label: "$Cashapp", url: "https://cash.app/$jumpforjoy69", gated: false },
     { label: "$Venmo", url: "https://venmo.com/u/Jump_4Joy1", gated: false },
-    { label: "$Chime", url: "https://chime.com/$jump4joy1", gated: false }
+    { label: "$Chime", copyValue: "$jump4joy1", gated: false }
   ]
 };
 // ═══════════════════════════════════════════════════════
@@ -69,6 +69,7 @@ function buildContentLinks() {
     btn.target = '_blank';
     btn.rel = 'noopener noreferrer';
     btn.dataset.gated = link.gated ? 'true' : 'false';
+    btn.dataset.copyValue = link.copyValue || '';
 
     // Create inner content with optional icon
     if (link.icon === 'lock') {
@@ -135,7 +136,19 @@ function attachLinkHandlers() {
       // Non-gated links - open immediately in new tab
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        openInNewTab(link.href);
+        // Copy-only link (e.g. Chime)
+        if (link.dataset.copyValue) {
+          navigator.clipboard.writeText(link.dataset.copyValue).then(() => {
+            const originalText = link.textContent;
+            link.textContent = 'Copied!';
+            setTimeout(() => { link.textContent = originalText; }, 1500);
+          }).catch(() => {
+            // Fallback: show instructions
+            link.textContent = 'Copy: $jump4joy1';
+          });
+        } else {
+          openInNewTab(link.href);
+        }
       });
     }
   });
@@ -200,52 +213,66 @@ function createVotingBanner() {
       top: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      border-bottom: 2px solid #f5c518;
-      padding: 12px 20px;
+      background: linear-gradient(135deg, #000000 0%, #1a0a00 50%, #000000 100%);
+      border-bottom: 3px solid #f5c518;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 16px;
       z-index: 2000;
       font-family: var(--font-secondary, 'Inter', sans-serif);
-      animation: slideDown 0.3s ease-out;
+      animation: slideDown 0.3s ease-out, pulseGlow 2s ease-in-out infinite;
+      box-shadow: 0 4px 20px rgba(245, 197, 24, 0.4);
     }
     @keyframes slideDown {
       from { transform: translateY(-100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 4px 20px rgba(245, 197, 24, 0.4); }
+      50% { box-shadow: 0 4px 30px rgba(245, 197, 24, 0.8); }
+    }
     .voting-banner__text {
       color: #f5c518;
-      font-weight: 600;
-      font-size: 14px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 10px rgba(245, 197, 24, 0.5);
     }
     .voting-banner__btn {
-      background: #f5c518;
-      color: #1a1a2e;
-      padding: 6px 16px;
+      background: linear-gradient(135deg, #f5c518 0%, #ffdb4d 100%);
+      color: #000000;
+      padding: 8px 20px;
       border-radius: 20px;
-      font-weight: 700;
-      font-size: 13px;
+      font-weight: 800;
+      font-size: 14px;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      box-shadow: 0 2px 10px rgba(245, 197, 24, 0.5);
+      letter-spacing: 0.5px;
     }
     .voting-banner__btn:hover {
-      background: #ffd700;
+      background: linear-gradient(135deg, #ffdb4d 0%, #f5c518 100%);
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(245, 197, 24, 0.7);
     }
     .voting-banner__close {
       position: absolute;
       right: 16px;
-      background: none;
-      border: none;
-      color: #888;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(245, 197, 24, 0.3);
+      color: #f5c518;
       font-size: 22px;
       cursor: pointer;
       line-height: 1;
-      padding: 0;
+      padding: 4px 10px;
+      border-radius: 8px;
+      transition: all 0.2s;
     }
     .voting-banner__close:hover {
-      color: #fff;
+      background: rgba(245, 197, 24, 0.2);
+      color: #ffdb4d;
     }
   `;
   document.head.appendChild(style);
