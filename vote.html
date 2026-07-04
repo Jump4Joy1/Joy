@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote for Joy! 🗳️</title>
+  <meta property="og:title" content="Vote for Joy! 🗳️">
+  <meta property="og:description" content="Help Joy win! Vote now — it's free and takes 10 seconds 💋">
+  <meta property="og:image" content="https://jump4joy.me/assets/avatar.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050f15;
+      --surface: #0a1a24;
+      --accent: #bb8773;
+      --accent2: #226691;
+      --pink: #ec4899;
+      --gold: #f5c518;
+      --purple: #a855f7;
+      --text: #ffffff;
+      --muted: #c58c77;
+      --font-head: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Blurred background photo */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url('https://jump4joy.me/assets/avatar.jpg') center top / cover no-repeat;
+      filter: blur(80px) brightness(0.12) saturate(0.4);
+      transform: scale(1.5);
+      z-index: -2;
+    }
+
+    /* Aurora gradient overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(236,72,153,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(168,85,247,0.07) 0%, transparent 50%);
+      z-index: -1;
+      animation: auroraShift 8s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0%   { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* Page container */
+    .page {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    @media (min-width: 768px) { .page { padding-top: 72px; } }
+
+    /* Urgency ticker */
+    .ticker {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(245,197,24,0.15), rgba(245,197,24,0.05), rgba(245,197,24,0.15));
+      border: 1px solid rgba(245,197,24,0.3);
+      border-radius: 999px;
+      padding: 9px 20px;
+      text-align: center;
+      margin-bottom: 32px;
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      animation: tickerPulse 3s ease-in-out infinite;
+    }
+    @keyframes tickerPulse {
+      0%,100% { box-shadow: none; }
+      50%      { box-shadow: 0 0 18px rgba(245,197,24,0.25); }
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      margin-bottom: 22px;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    /* Spinning halo rings */
+    .halo {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(187,135,115,0.3);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .halo-1 {
+      width: 144px; height: 144px;
+      animation: haloSpin 6s linear infinite;
+      border-color: rgba(187,135,115,0.35);
+    }
+    .halo-2 {
+      width: 164px; height: 164px;
+      animation: haloSpin 10s linear infinite reverse;
+      border-color: rgba(187,135,115,0.15);
+    }
+    @keyframes haloSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #bb8773 60%, #f5c518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 320px;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+
+    /* Section label */
+    .section-label {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+    .section-label::before, .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(187,135,115,0.2);
+    }
+
+    /* Cards */
+    .cards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      position: relative;
+      border-radius: 20px;
+      padding: 28px 24px 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.015);
+    }
+
+    /* Shimmer on hover */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+      transition: left 0.5s ease;
+    }
+    .card:hover::before { left: 150%; }
+
+    /* Maxim card: gold */
+    .card--maxim {
+      background: linear-gradient(145deg, rgba(10,26,36,0.92) 0%, rgba(28,18,4,0.88) 100%);
+      border: 1px solid rgba(245,197,24,0.45);
+      box-shadow: 0 0 40px rgba(245,197,24,0.08), inset 0 1px 0 rgba(245,197,24,0.1);
+    }
+    .card--maxim:hover {
+      box-shadow: 0 16px 48px rgba(245,197,24,0.2), inset 0 1px 0 rgba(245,197,24,0.1);
+    }
+
+    /* Orbit card: purple-pink */
+    .card--orbit {
+      background: linear-gradient(145deg, rgba(10,26,36,0.92) 0%, rgba(20,5,30,0.88) 100%);
+      border: 1px solid rgba(168,85,247,0.4);
+      box-shadow: 0 0 40px rgba(168,85,247,0.06), inset 0 1px 0 rgba(168,85,247,0.1);
+    }
+    .card--orbit:hover {
+      box-shadow: 0 16px 48px rgba(168,85,247,0.2), inset 0 1px 0 rgba(168,85,247,0.1);
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .badge--live {
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.4);
+      color: #f87171;
+    }
+    .badge--orbit {
+      background: rgba(168,85,247,0.15);
+      border: 1px solid rgba(168,85,247,0.4);
+      color: #c084fc;
+    }
+    .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: livePulse 1.2s ease-in-out infinite;
+    }
+    @keyframes livePulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.35; transform: scale(0.75); }
+    }
+
+    /* Platform wordmark */
+    .platform-logo {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo--maxim { color: var(--gold); }
+    .logo--orbit {
+      background: linear-gradient(135deg, #c084fc, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-title {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .card-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    /* Vote buttons — the star of the show */
+    .vote-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 40px;
+      border-radius: 999px;
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      overflow: hidden;
+      min-width: 210px;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Shine sweep */
+    .vote-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.45s ease;
+    }
+    .vote-btn:hover::after { left: 150%; }
+    .vote-btn:hover { transform: translateY(-3px) scale(1.05); }
+    .vote-btn:active { transform: scale(0.97); }
+
+    /* Maxim button */
+    .btn--maxim {
+      background: linear-gradient(135deg, #f5c518 0%, #ffe657 45%, #e8a800 100%);
+      color: #000;
+      box-shadow: 0 6px 28px rgba(245,197,24,0.55), 0 2px 6px rgba(0,0,0,0.25);
+      animation: pulsGold 2.5s ease-in-out infinite;
+    }
+    @keyframes pulsGold {
+      0%,100% { box-shadow: 0 6px 28px rgba(245,197,24,0.55), 0 2px 6px rgba(0,0,0,0.25); }
+      50%      { box-shadow: 0 6px 42px rgba(245,197,24,0.9), 0 2px 6px rgba(0,0,0,0.25); }
+    }
+    .btn--maxim:hover {
+      box-shadow: 0 10px 50px rgba(245,197,24,1), 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    /* Orbit button */
+    .btn--orbit {
+      background: linear-gradient(135deg, #9333ea 0%, #a855f7 40%, #ec4899 100%);
+      color: #fff;
+      box-shadow: 0 6px 28px rgba(168,85,247,0.55), 0 2px 6px rgba(0,0,0,0.25);
+      animation: pulsPurple 2.5s ease-in-out infinite 0.7s;
+    }
+    @keyframes pulsPurple {
+      0%,100% { box-shadow: 0 6px 28px rgba(168,85,247,0.55), 0 2px 6px rgba(0,0,0,0.25); }
+      50%      { box-shadow: 0 6px 42px rgba(236,72,153,0.8), 0 2px 6px rgba(0,0,0,0.25); }
+    }
+    .btn--orbit:hover {
+      box-shadow: 0 10px 50px rgba(236,72,153,0.9), 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    /* Social proof line */
+    .social-proof {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.3px;
+    }
+
+    /* How to */
+    .how-to {
+      width: 100%;
+      margin-top: 32px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    .how-to__title {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 14px;
+    }
+    .how-to__steps { display: flex; flex-direction: column; gap: 10px; }
+    .how-to__step {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(187,135,115,0.15);
+      border: 1px solid rgba(187,135,115,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-size: 10px; font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.22);
+      line-height: 1.8;
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+    .footer a:hover { color: var(--text); }
+
+    /* Confetti canvas */
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
+
+    /* Ripple */
+    @keyframes rippleAnim {
+      from { transform: scale(0); opacity: 1; }
+      to   { transform: scale(5); opacity: 0; }
+    }
+    .ripple-el {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: rippleAnim 0.6s ease-out forwards;
+    }
+
+    @media (max-width: 400px) {
+      .hero-title { font-size: 26px; }
+      .vote-btn { padding: 14px 28px; font-size: 15px; min-width: 180px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<div class="page">
+
+  <!-- Urgency ticker -->
+  <div class="ticker">⚡ Contests are LIVE — Vote daily, share with friends ⚡</div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="avatar-wrap">
+      <span class="halo halo-1"></span>
+      <span class="halo halo-2"></span>
+      <img class="avatar"
+        src="https://jump4joy.me/assets/avatar.jpg"
+        alt="Joy!"
+        onerror="this.src='https://pbs.twimg.com/profile_images/1552036985566760961/j-xt6AFV_400x400.jpg'">
+    </div>
+    <h1 class="hero-title">Vote for Joy! 💋</h1>
+    <p class="hero-sub">Two contests. Two chances to help me win.<br><strong>Free &amp; takes 10 seconds each.</strong><br>Vote daily + share with your friends 🙏</p>
+  </div>
+
+  <div class="section-label">Cast Your Votes</div>
+
+  <!-- Cards -->
+  <div class="cards">
+
+    <!-- Maxim -->
+    <div class="card card--maxim">
+      <span class="badge badge--live">
+        <span class="live-dot"></span>
+        Live Now
+      </span>
+      <div class="platform-logo logo--maxim">MAXIM</div>
+      <div class="card-title">Cover Girl Contest</div>
+      <div class="card-desc">Vote for Joy to be the next Maxim Cover Girl! Votes reset daily — come back tomorrow 📅</div>
+      <a class="vote-btn btn--maxim"
+        href="https://covergirl.maxim.com/p/X2CSJGYS"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="onVote(this,'gold')">
+        ⭐ Vote on Maxim
+      </a>
+      <div class="social-proof">Free • Opens in new tab • Takes 10 seconds</div>
+    </div>
+
+    <!-- Orbit -->
+    <div class="card card--orbit">
+      <span class="badge badge--orbit">🪐 Active</span>
+      <div class="platform-logo logo--orbit">orbiiit</div>
+      <div class="card-title">Beauty Contest</div>
+      <div class="card-desc">Help Joy climb the leaderboard on Orbiiit! Every vote pushes her higher 🏆</div>
+      <a class="vote-btn btn--orbit"
+        href="https://orbiiit.com/en/participants/c4f1381d-7092-42aa-8f01-fa49ae67a78f?contestId=d663c28e-5396-4577-9c5d-2610a36322f8"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="onVote(this,'purple')">
+        🪐 Vote on Orbiiit
+      </a>
+      <div class="social-proof">Free • No account needed • Takes 10 seconds</div>
+    </div>
+
+  </div>
+
+  <!-- How to vote -->
+  <div class="how-to">
+    <div class="how-to__title">How it works</div>
+    <div class="how-to__steps">
+      <div class="how-to__step">
+        <span class="step-num">1</span>
+        <span>Tap a vote button — contest opens in a new tab</span>
+      </div>
+      <div class="how-to__step">
+        <span class="step-num">2</span>
+        <span>Click vote on the page — about 10 seconds total</span>
+      </div>
+      <div class="how-to__step">
+        <span class="step-num">3</span>
+        <span>Maxim votes reset daily — bookmark &amp; come back!</span>
+      </div>
+      <div class="how-to__step">
+        <span class="step-num">4</span>
+        <span>Share this page — the more the merrier 💛</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer">
+    Thank you for your love &amp; support 💋<br>
+    <a href="https://jump4joy.me">← Back to jump4joy.me</a>
+  </p>
+
+</div>
+
+<script>
+/* ── Confetti ─────────────────────────────────────────────────────────── */
+const cvs = document.getElementById('confetti');
+const ctx = cvs.getContext('2d');
+let W = cvs.width  = window.innerWidth;
+let H = cvs.height = window.innerHeight;
+window.addEventListener('resize', () => { W = cvs.width = window.innerWidth; H = cvs.height = window.innerHeight; });
+
+let particles = [], rafId = null;
+
+const PALETTES = {
+  gold:   ['#f5c518','#ffdb4d','#f5a818','#ffffff','#bb8773','#ffe082'],
+  purple: ['#a855f7','#ec4899','#c084fc','#f9a8d4','#ffffff','#e879f9']
+};
+
+function fireConfetti(theme) {
+  const colors = PALETTES[theme];
+  for (let i = 0; i < 100; i++) {
+    const angle = (Math.random() * 180 + 180) * Math.PI / 180; // shoot upward
+    const speed = Math.random() * 10 + 6;
+    particles.push({
+      x: W * (0.25 + Math.random() * 0.5),
+      y: H * 0.6,
+      vx: Math.cos(angle) * speed * (Math.random() * 1.5 + 0.5),
+      vy: Math.sin(angle) * speed,
+      r: Math.random() * 6 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: 1,
+      gravity: 0.3 + Math.random() * 0.2,
+      rot: Math.random() * 360,
+      rotV: (Math.random() - 0.5) * 10,
+      shape: Math.random() > 0.45 ? 'rect' : 'circle',
+    });
+  }
+  if (!rafId) loop();
+}
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+  for (const p of particles) {
+    p.vy += p.gravity; p.x += p.vx; p.y += p.vy;
+    p.rot += p.rotV; p.alpha -= 0.013;
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.alpha);
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    if (p.shape === 'rect') ctx.fillRect(-p.r, -p.r * 0.4, p.r * 2, p.r * 0.8);
+    else { ctx.beginPath(); ctx.arc(0,0,p.r,0,Math.PI*2); ctx.fill(); }
+    ctx.restore();
+  }
+  particles = particles.filter(p => p.alpha > 0 && p.y < H + 20);
+  rafId = particles.length ? requestAnimationFrame(loop) : null;
+  if (!rafId) ctx.clearRect(0, 0, W, H);
+}
+
+/* ── Ripple ───────────────────────────────────────────────────────────── */
+function ripple(btn, theme) {
+  const el = document.createElement('span');
+  const size = Math.max(btn.offsetWidth, btn.offsetHeight);
+  el.className = 'ripple-el';
+  el.style.cssText = [
+    'width:' + size + 'px', 'height:' + size + 'px',
+    'left:' + (btn.offsetWidth/2 - size/2) + 'px',
+    'top:' + (btn.offsetHeight/2 - size/2) + 'px',
+    'background:' + (theme==='gold' ? 'rgba(245,197,24,0.45)' : 'rgba(168,85,247,0.45)')
+  ].join(';');
+  btn.appendChild(el);
+  el.addEventListener('animationend', () => el.remove());
+}
+
+/* ── Combined handler ─────────────────────────────────────────────────── */
+function onVote(btn, theme) {
+  fireConfetti(theme);
+  ripple(btn, theme);
+}
+
+/* ── Card entrance animation ──────────────────────────────────────────── */
+document.querySelectorAll('.card').forEach((card, i) => {
+  card.style.cssText += 'opacity:0;transform:translateY(28px);transition:opacity 0.5s ease,transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+  setTimeout(() => { card.style.opacity='1'; card.style.transform='translateY(0)'; }, 200 + i * 160);
+});
+</script>
+</body>
+</html>

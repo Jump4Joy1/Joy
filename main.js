@@ -236,7 +236,7 @@ window.onerror = function(message, source, lineno, colno, error) {
 // VOTING BANNER — Maxim Cover Girl Contest
 // ═══════════════════════════════════════════════════════
 const VOTING_BANNER_KEY = 'jump4joy_voting_banner_dismissed';
-const VOTING_URL = 'https://covergirl.maxim.com/p/X2CSJGYS';
+const VOTING_URL = 'https://vote.jump4joy.me';
 
 function createVotingBanner() {
   // Already dismissed this session
