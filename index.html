@@ -34,6 +34,12 @@
     <p>Something went wrong loading this page. Please refresh.</p>
   </div>
 
+  <script>
+    // If accessed via vote.jump4joy.me, redirect to the vote page
+    if (window.location.hostname === 'vote.jump4joy.me' && window.location.pathname !== '/vote.html') {
+      window.location.replace('/vote.html');
+    }
+  </script>
   <script src="main.js"></script>
 </body>
 </html>
