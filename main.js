@@ -236,7 +236,7 @@ window.onerror = function(message, source, lineno, colno, error) {
 // VOTING BANNER — Maxim Cover Girl Contest
 // ═══════════════════════════════════════════════════════
 const VOTING_BANNER_KEY = 'jump4joy_voting_banner_dismissed';
-const VOTING_URL = 'https://vote.jump4joy.me';
+const VOTING_URL = 'https://jump4joy.me/vote.html';
 
 function createVotingBanner() {
   // Already dismissed this session
@@ -245,7 +245,7 @@ function createVotingBanner() {
   const banner = document.createElement('div');
   banner.id = 'voting-banner';
   banner.innerHTML = `
-    <span class="voting-banner__text">Vote for Joy for Maxim Cover Girl!</span>
+    <span class="voting-banner__text">Vote for Joy in All Contests!</span>
     <a href="${VOTING_URL}" target="_blank" rel="noopener noreferrer" class="voting-banner__btn">Vote Now</a>
     <button class="voting-banner__close" aria-label="Dismiss">&times;</button>
   `;
